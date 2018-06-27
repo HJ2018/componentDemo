@@ -1,0 +1,6 @@
+framework module SegmetBar {
+  umbrella header "SegmetBar-umbrella.h"
+
+  export *
+  module * { export * }
+}

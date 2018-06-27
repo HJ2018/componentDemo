@@ -1,0 +1,6 @@
+framework module HYNDEMO {
+  umbrella header "HYNDEMO-umbrella.h"
+
+  export *
+  module * { export * }
+}

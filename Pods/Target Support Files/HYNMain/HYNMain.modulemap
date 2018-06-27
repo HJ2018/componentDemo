@@ -1,0 +1,6 @@
+framework module HYNMain {
+  umbrella header "HYNMain-umbrella.h"
+
+  export *
+  module * { export * }
+}
