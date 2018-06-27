@@ -146,7 +146,7 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 
 
-    NSLog(@"摸到我了");
+//    NSLog(@"摸到我了");
 //    static BOOL isPlay = NO;
 //    isPlay = !isPlay;
 //    [[NSNotificationCenter defaultCenter] postNotificationName:@"playState" object:@(isPlay)];
