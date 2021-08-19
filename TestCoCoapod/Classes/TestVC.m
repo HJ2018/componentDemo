@@ -9,27 +9,19 @@
 #import "TestVC.h"
 #import "XMGSegmentBar.h"
 #import "UIView+XMGLayout.h"
-
-#define kScreenBounds [[UIScreen mainScreen] bounds]
-#define kScreenWidth [[UIScreen mainScreen] bounds].size.width
-#define kScreenHeight [[UIScreen mainScreen] bounds].size.height
-
-// 共有的间距
-#define kCommonMargin 10
-// 发现 顶部 菜单栏的高度
-#define kMenueBarHeight 35
-// 导航栏的高度
-#define kNavigationBarMaxY 64
-// tabbar的高度
-#define kTabbarHeight 0
+#import "Base.h"
 
 
-// 随机颜色
-#define Color(r,g,b,a) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
-#define XMGColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1]
-#define XMGAlphaColor(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
-#define XMGRandomColor XMGColor(arc4random_uniform(255.0), arc4random_uniform(255.0), arc4random_uniform(255.0))
-#define kCommonColor XMGColor(223, 223, 223)
+
+#define iPhoneX (kScreenHeight >= 812.0)
+
+//iPhoneX状态栏的高度 44
+#define kState_Height (iPhoneX ? 44.0 : 20.0)
+//NavigationBar的高度 44
+#define kNavigationBar_Height 44.0
+#define SafeAreaTopHeight (kScreenHeight >= 812.0 ? 88 : 64)
+#define statusTopHeight (kScreenHeight >= 812.0 ? 44 : 20)
+#define SafeAreaTabBarpHeight (kScreenHeight >= 812.0 ? 83 : 49)
 
 
 @interface TestVC ()<UIScrollViewDelegate, XMGSegmentBarDelegate>
@@ -51,7 +43,7 @@
         XMGSegmentConfig *config = [XMGSegmentConfig defaultConfig];
         config.isShowMore = YES;
         _segmentBar = [XMGSegmentBar segmentBarWithConfig:config];
-        _segmentBar.y = kNavigationBarMaxY;
+        _segmentBar.y = SafeAreaTopHeight;
         _segmentBar.backgroundColor = [UIColor whiteColor];
         _segmentBar.delegate = self;
     }
@@ -61,7 +53,7 @@
 -(UIScrollView *)contentScrollView
 {
     if (!_contentScrollView) {
-        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kNavigationBarMaxY + self.segmentBar.height, kScreenWidth, kScreenHeight - (kNavigationBarMaxY + self.segmentBar.height))];
+        UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight + self.segmentBar.height, kScreenWidth, kScreenHeight - (SafeAreaTopHeight + self.segmentBar.height))];
         scrollView.pagingEnabled = YES;
         scrollView.delegate = self;
         scrollView.contentSize = CGSizeMake(scrollView.width * self.childViewControllers.count, 0);
